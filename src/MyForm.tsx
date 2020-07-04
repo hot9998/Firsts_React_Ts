@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 type MyFormPorps = {
   onSubmit: (form: { name: string; description: string }) => void;
 };
 
 function MyForm({ onSubmit }: MyFormPorps) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -26,6 +27,10 @@ function MyForm({ onSubmit }: MyFormPorps) {
       name: "",
       description: "",
     });
+    if (!inputRef.current) {
+      return;
+    }
+    inputRef.current.focus();
   };
 
   return (
