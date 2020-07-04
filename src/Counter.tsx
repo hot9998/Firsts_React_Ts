@@ -1,16 +1,22 @@
-import React, { useState } from "react";
-import { type } from "os";
+import React, { useReducer } from "react";
+
+type Action = { type: "INCREASE" } | { type: "DECREASE" };
+
+function reducer(state: number, action: Action): number {
+  switch (action.type) {
+    case "INCREASE":
+      return state + 1;
+    case "DECREASE":
+      return state - 1;
+    default:
+      throw new Error("Unhandled action");
+  }
+}
 
 function Counter() {
-  const [count, setCount] = useState(0);
-  const onIncrease = () => setCount(count + 1);
-  const onDecreae = () => setCount(count - 1);
-
-  type Information = { name: string; description: string };
-  const [info, setInfo] = useState<Information | null>(null);
-
-  type Todo = { id: number; text: string; done: boolean };
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [count, dispatch] = useReducer(reducer, 0);
+  const onIncrease = () => dispatch({ type: "INCREASE" });
+  const onDecreae = () => dispatch({ type: "DECREASE" });
 
   return (
     <div>
