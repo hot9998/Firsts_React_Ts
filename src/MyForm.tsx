@@ -35,7 +35,12 @@ function MyForm({ onSubmit }: MyFormPorps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input name="name" value={name} onChange={onChange}></input>
+      <input
+        name="name"
+        value={name}
+        onChange={onChange}
+        ref={inputRef}
+      ></input>
       <input name="description" value={description} onChange={onChange}></input>
       <button type="submit">등록</button>
     </form>
